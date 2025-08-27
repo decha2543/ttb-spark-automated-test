@@ -1,0 +1,6 @@
+// Use for Appium Inspector
+{
+	"platformName": "android",
+	"appium:automationName": "uiautomator2",
+	"appium:app": "//PathToApk"
+}

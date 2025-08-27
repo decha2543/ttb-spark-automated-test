@@ -1,0 +1,8 @@
+.venv
+.idea
+.robotcode_cache
+
+outputs
+results
+
+# Allow ".env" file because of for test purpose only
