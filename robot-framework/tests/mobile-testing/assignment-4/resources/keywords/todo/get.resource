@@ -1,18 +1,22 @@
 *** Settings ***
-Resource    ../../global-variable.resource
-Resource    ${resources}/global-library.resource
+Resource    ../../global-suite-settings.resource
 
 
 *** Keywords ***
-Get Specific Todo Item
-    [Arguments]    ${text}
+Get Specific Text
+    [Arguments]    ${locator}    ${text}
 
-    ${capitalized}=    Convert To Title Case    ${text}
-    ${locator}=    Set Variable    ${specific_todo_item.replace("_{}_", "${capitalized}")}
+    ${locator}=    Replace String    ${locator}    _{}_    ${text}
     RETURN    ${locator}
 
 Click To Do Item
     [Arguments]    ${text}
-    ${locator}=    Get Specific Todo Item    ${text}
+
+    ${locator}=    Get Specific Text    ${todo_item}    ${text}
     Tap    ${locator}
-    Validate Edit Todo Page
+    Validate Add Todo Page
+
+Get Date Field
+    ${date_text}=    Get Text    ${date_select}
+    ${time_text}=    Get Text    ${time_select}
+    RETURN    ${date_text}    ${time_text}

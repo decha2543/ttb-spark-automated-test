@@ -1,6 +1,5 @@
 *** Settings ***
-Resource    ../../global-variable.resource
-Resource    ${resources}/global-library.resource
+Resource    ../../global-suite-settings.resource
 
 
 *** Keywords ***
@@ -10,14 +9,18 @@ Validate Home Page
 Validate Todo Item
     [Arguments]    ${validate_text}
 
-    ${specific_todo}=    Get Specific Todo Item    ${validate_text}
+    ${specific_todo}=    Get Specific Text    ${todo_item}    ${validate_text}
     Element Should Be Visible    ${specific_todo}
-
-Validate Count Todo Item
-    [Arguments]    ${expected_count}
-
-    ${count}=    Get Element Count    ${all_todo_item}
-    Should Be Equal As Integers    ${count}    ${expected_count}
 
 Validate Todo Item Empty
     Element Should Be Visible    ${empty_todo_item}
+
+Validate Todo Item With Reminder
+    [Arguments]    ${validate_date}    ${validate_time}
+
+    ${today}=    Set Variable    ${validate_date}
+    IF    "${validate_date}"=="Today"
+        ${today}=    Get Current Date    result_format=%b %d, %Y
+    END
+    ${full_date}=    Get Specific Text    ${remind_overview_text}    ${today}${SPACE}${SPACE}${validate_time}
+    Element Should Be Visible    ${full_date}

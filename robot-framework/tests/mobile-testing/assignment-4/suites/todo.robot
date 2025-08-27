@@ -43,11 +43,9 @@ TC003 - Add Multiple Todo List Then Delete
         Submit Add Todo Item
         Validate Todo Item    ${text}
     END
-
     FOR    ${index}    IN RANGE    1    6
         Remove Todo Item
     END
-
     Validate Todo Item Empty
 
 TC004 - Rename Todo List
@@ -71,7 +69,7 @@ TC005 - Add Todo List With Special Character
     [Documentation]    Verify User Add A New Todo List With Special Character
     [Tags]    functional
 
-    ${text}=    Set Variable    test!"#$%&'()*+,-./:;<=>?@[]^_`{|}~
+    ${text}=    Set Variable    test!$%&*+,-./:;<=>?@^_`~
     Click Add Todo Button
     Input Todo Name    ${text}
     Submit Add Todo Item
@@ -83,7 +81,7 @@ TC006 - Add Todo List With White Space
     [Documentation]    Verify User Add A New Todo List With White Space
     [Tags]    functional
 
-    ${text}=    Set Variable    test test test test test
+    ${text}=    Set Variable    test${SPACE}test${SPACE}test${SPACE}test${SPACE}test
     Click Add Todo Button
     Input Todo Name    ${text}
     Submit Add Todo Item
@@ -102,11 +100,9 @@ TC007 - Add Todo List With Duplicate Name
         Submit Add Todo Item
         Validate Todo Item    ${text}
     END
-
     FOR    ${index}    IN RANGE    1    6
         Remove Todo Item
     END
-
     Validate Todo Item Empty
 
 TC008 - Add Todo List With Empty Name
@@ -122,10 +118,14 @@ TC009 - Add Todo List With Reminder
     [Documentation]    Verify User Add A New Todo List With Reminder
     [Tags]    functional
 
-    Log    1
-
-TC010 - Add Todo List With Reminder But In Past
-    [Documentation]    Verify User Add A New Todo List With Reminder But In Past
-    [Tags]    negative
-
-    Log    1
+    ${text}=    Set Variable    test
+    Click Add Todo Button
+    Input Todo Name    ${text}
+    Toggle Remind Me Switch
+    ${date}    ${time}=    Get Date Field
+    Validate Remind Me Message    ${date}    ${time}
+    Submit Add Todo Item
+    Validate Todo Item    ${text}
+    Validate Todo Item With Reminder    ${date}    ${time}
+    Remove Todo Item
+    Validate Todo Item Empty

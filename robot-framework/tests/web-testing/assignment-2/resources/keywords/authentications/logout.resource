@@ -1,6 +1,5 @@
 *** Settings ***
-Resource    ../../global-variable.resource
-Resource    ${resources}/global-library.resource
+Resource    ../../global-suite-settings.resource
 
 
 *** Keywords ***

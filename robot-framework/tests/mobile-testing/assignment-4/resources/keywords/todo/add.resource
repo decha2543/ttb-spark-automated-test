@@ -1,6 +1,5 @@
 *** Settings ***
-Resource    ../../global-variable.resource
-Resource    ${resources}/global-library.resource
+Resource    ../../global-suite-settings.resource
 
 
 *** Keywords ***
@@ -18,3 +17,15 @@ Input Todo Name
 Submit Add Todo Item
     Tap    ${submit_add_todo_button}
     Validate Home Page
+
+Toggle Remind Me Switch
+    Tap    ${remind_me_switch}
+
+Select Year Field
+    [Arguments]    ${selected_year}
+
+    ${inner_year_select}=    Get Specific Text    ${remind_overview_text}    ${selected_year}
+    Tap    ${date_select}
+    Tap    ${date_select_inner_year}
+    Tap    ${inner_year_select}
+    Tap    ${date_select_ok_button}
