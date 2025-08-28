@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        docker { image 'my-robot-agent:latest' }
+        dockerContainer { image 'my-robot-agent:latest' }
     }
     environment {
         REQUIREMENT_FILE_PATH = 'robot-framework/requirements.txt'
