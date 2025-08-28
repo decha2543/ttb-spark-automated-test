@@ -2,6 +2,7 @@ pipeline {
     agent {
         dockerContainer {
             image 'my-robot-agent:latest'
+            args '-u 0'
         }
     }
     environment {
