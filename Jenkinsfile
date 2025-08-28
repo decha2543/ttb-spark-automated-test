@@ -1,9 +1,7 @@
 pipeline {
     agent {
-        dockerfile {
-            filename 'Dockerfile'
-            dir 'robot-framework'
-            label 'robot-framework'
+        docker {
+            image 'my-robot-agent:latest'
         }
     }
     environment {
