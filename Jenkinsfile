@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        REQUIREMENT_FILE_PATH = "robot-framework/requirements.txt"
+        REQUIREMENT_FILE_PATH = 'robot-framework/requirements.txt'
     }
     stages {
         stage('START: Checkout Code From Git') {
@@ -10,31 +10,32 @@ pipeline {
                 checkout scm
             }
         }
-        stage('BUILD: Prepare Test Environment'){
+        stage('BUILD: Prepare Test Environment') {
             steps {
-                echo "Update pip to latest version"
-                sh "pip install --upgrade pip"
+                echo 'Update pip to latest version'
+                sh 'pip install --upgrade pip'
 
-                echo "Install Python Package From requirements.txt"
+                echo 'Install Python Package From requirements.txt'
                 sh "pip install -r ${REQUIREMENT_FILE_PATH} --no-cache-dir"
-                sh "npx playwright install && rfbrowser init"
+                sh 'npx playwright install && rfbrowser init'
             }
         }
         stage('EXEC: Run Test Automate') {
-            parallel {
-                stage('Execute Test: Web UI'){
-                    echo "Start Execute Test: Web UI"
-                    sh "echo hi"
-                }
-
-                stage('Execute Test: API'){
-                    echo "Start Execute Test: API"
-                    sh "echo hi2"
-                }
+            steps {
+                parallel(
+                    'Execute Test: Web UI' {
+                        echo 'Start Execute Test: Web UI'
+                        sh 'echo hi'
+                    },
+                    'Execute Test: API' {
+                        echo 'Start Execute Test: API'
+                        sh 'echo hi2'
+                    }
+                )
             }
         }
         stage('REPORT: Send Result To Jenkins') {
-            echo "Publishing results"
+            echo 'Publishing results'
         }
     }
 }
