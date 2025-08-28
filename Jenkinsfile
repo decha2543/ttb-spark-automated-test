@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        docker { image 'node:22.18.0-alpine3.22' }
+    }
     environment {
         REQUIREMENT_FILE_PATH = 'robot-framework/requirements.txt'
     }
@@ -13,10 +15,10 @@ pipeline {
         stage('BUILD: Prepare Test Environment') {
             steps {
                 echo 'Update pip to latest version'
-                sh 'python3 -m pip install --upgrade pip'
+                sh 'pip install --upgrade pip'
 
                 echo 'Install Python Package From requirements.txt'
-                sh "python3 -m pip install -r ${REQUIREMENT_FILE_PATH} --no-cache-dir"
+                sh "pip install -r ${REQUIREMENT_FILE_PATH} --no-cache-dir"
                 sh 'npx playwright install && rfbrowser init'
             }
         }
