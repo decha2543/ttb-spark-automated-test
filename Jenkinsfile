@@ -22,16 +22,18 @@ pipeline {
         }
         stage('EXEC: Run Test Automate') {
             steps {
-                parallel(
-                    'Execute Test: Web UI' {
-                        echo 'Start Execute Test: Web UI'
-                        sh 'echo hi'
-                    },
-                    'Execute Test: API' {
-                        echo 'Start Execute Test: API'
-                        sh 'echo hi2'
-                    }
-                )
+                script {
+                    parallel(
+                        'Execute Test: Web UI' {
+                            echo 'Start Execute Test: Web UI'
+                            sh 'echo hi'
+                        },
+                        'Execute Test: API' {
+                            echo 'Start Execute Test: API'
+                            sh 'echo hi2'
+                        }
+                    )
+                }
             }
         }
         stage('REPORT: Send Result To Jenkins') {
