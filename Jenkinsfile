@@ -35,7 +35,9 @@ pipeline {
             }
         }
         stage('REPORT: Send Result To Jenkins') {
-            echo 'Publishing results'
+            steps {
+                echo 'Publishing results'
+            }
         }
     }
 }
