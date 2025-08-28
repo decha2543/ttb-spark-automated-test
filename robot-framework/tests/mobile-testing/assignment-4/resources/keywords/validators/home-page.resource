@@ -22,5 +22,5 @@ Validate Todo Item With Reminder
     IF    "${validate_date}"=="Today"
         ${today}=    Get Current Date    result_format=%b %d, %Y
     END
-    ${full_date}=    Get Specific Text    ${remind_overview_text}    ${today}${SPACE}${SPACE}${validate_time}
+    ${full_date}=    Get Specific Text    ${remind_me_text_in_todo}    ${today}${SPACE}${SPACE}${validate_time}
     Element Should Be Visible    ${full_date}

@@ -14,5 +14,5 @@ Validate Remind Me Message
     IF    "${validate_date}"=="Today"
         ${today}=    Get Current Date    result_format=%d %b, %Y
     END
-    ${full_date}=    Get Specific Text    ${remind_overview_text}    ${today},${SPACE}${validate_time}
+    ${full_date}=    Get Specific Text    ${remind_me_text_summary}    ${today},${SPACE}${validate_time}
     Element Should Be Visible    ${full_date}

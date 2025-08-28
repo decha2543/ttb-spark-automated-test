@@ -24,7 +24,7 @@ Toggle Remind Me Switch
 Select Year Field
     [Arguments]    ${selected_year}
 
-    ${inner_year_select}=    Get Specific Text    ${remind_overview_text}    ${selected_year}
+    ${inner_year_select}=    Get Specific Text    ${remind_me_text_summary}    ${selected_year}
     Tap    ${date_select}
     Tap    ${date_select_inner_year}
     Tap    ${inner_year_select}
