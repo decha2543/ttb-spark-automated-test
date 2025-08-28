@@ -2,7 +2,6 @@ pipeline {
     agent {
         dockerContainer {
             image 'my-robot-agent:latest'
-            args '--network host'
         }
     }
     environment {
