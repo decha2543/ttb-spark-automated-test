@@ -1,5 +1,11 @@
 pipeline {
-    agent any
+    agent {
+        dockerfile {
+            filename 'Dockerfile'
+            dir 'robot-framework'
+            label 'robot-framework'
+        }
+    }
     environment {
         REQUIREMENT_FILE_PATH = 'robot-framework/requirements.txt'
     }
@@ -8,16 +14,6 @@ pipeline {
             steps {
                 echo "Checkout Code From $GIT_URL"
                 checkout scm
-            }
-        }
-        stage('BUILD: Prepare Test Environment') {
-            steps {
-                echo 'Update pip to latest version'
-                sh 'pip install --upgrade pip'
-
-                echo 'Install Python Package From requirements.txt'
-                sh "pip install -r ${REQUIREMENT_FILE_PATH} --no-cache-dir"
-                sh 'npx playwright install && rfbrowser init'
             }
         }
         stage('EXEC: Run Test Automate') {
